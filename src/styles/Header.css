@@ -1,9 +1,9 @@
+
 .navbar{
     height: 100%;
 }
 
 .logo{
-    padding-left: 18%;
     padding-top: 8px;
 }
 
@@ -21,7 +21,6 @@
     display: flex;
     justify-content: center;
     align-self: center;
-    padding-left: 5%;
 }
 
 .userIcon{

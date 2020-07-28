@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Header";
-import LeftSider from './components/LeftSider';
+import Header from "./components/common/Header";
+import LeftSider from "./components/common/LeftSider";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <LeftSider/>
+      <LeftSider />
     </div>
   );
 }
