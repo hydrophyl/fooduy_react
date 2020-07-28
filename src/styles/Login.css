@@ -1,0 +1,22 @@
+.login-window{
+    height: 60vh;
+    width: 30%;
+    background: url(../images/login-bg.jpg) no-repeat fixed center;
+    background-size: 600px 600px;
+    background-blend-mode: darken;
+}
+
+.login-form{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ant-form-item-required {
+    color: white !important;
+}
+
+.btn-login{
+    width: 10em;
+}

@@ -1,13 +1,20 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/common/Header";
-import LeftSider from "./components/common/LeftSider";
+import Dashboard from "./components/dashboard/Dashboard";
+import Login from './components/auth/Login';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <LeftSider />
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Login}/>
+          <Route component={Dashboard}/>
+        </Switch>
+      </Router>
     </div>
   );
 }
