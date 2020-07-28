@@ -1,0 +1,29 @@
+.navbar{
+    height: 100%;
+}
+
+.logo{
+    padding-left: 18%;
+    padding-top: 8px;
+}
+
+.logo *{
+    height: 80px;
+}
+
+.header{
+    height: 100px;
+    width: 100%;
+    background-color: #262626;
+}
+
+.navItems{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    padding-left: 5%;
+}
+
+.userIcon{
+    background-color: #135200;
+}
