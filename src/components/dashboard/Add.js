@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Typography, Input, Select, Switch, Row, Col, Button } from "antd";
-import Form from "antd/lib/form/Form";
-import FormItem from "antd/lib/form/FormItem";
+import {
+  Form,
+  InputNumber,
+  Typography,
+  Input,
+  Select,
+  Switch,
+  Row,
+  Col,
+  Button,
+} from "antd";
 import { add } from "../../action/dashboard/dashboard";
 import { toast } from "react-toastify";
 
 const { Title } = Typography;
 const { Option } = Select;
+
 function Add() {
+  const [disable, setDisable] = useState(true);
+
   const [formData, setFormData] = useState({
     name: "",
     price: 0,
@@ -18,6 +29,11 @@ function Add() {
   });
 
   const { name, price, quantity, weight, category, boughtSource } = formData;
+
+  const addGood = (element) => {
+    onSubmit(element);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -30,6 +46,8 @@ function Add() {
       category.length === null ||
       category === ""
     ) {
+      console.log(formData);
+      toast.warn("Name of good is required");
       if (name.length === null || name === "")
         toast.warn("Name of good is required");
       if (price === 0 || price === "")
@@ -55,8 +73,8 @@ function Add() {
           price: 0,
           quantity: 0,
           weight: 0,
-          boughtSource: "",
           category: "",
+          boughtSource: "",
         });
       } catch (e) {
         toast.warning(
@@ -77,99 +95,106 @@ function Add() {
         wrapperCol={{ span: 20 }}
         layout="horizontal"
       >
-        <FormItem
-          label="Name"
-          rules={[
-            {
-              required: true,
-              message: "Please input name!",
-            },
-          ]}
-        >
+        <Form.Item label="Name">
           <Input
-            placeholder="Input something here"
+            name="name"
+            placeholder="Name des Lebensmittels"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
-        </FormItem>
-        <FormItem
-          label="Preis"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input placeholder="Input something here" />
-        </FormItem>
-        <FormItem
-          label="Gewicht"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input placeholder="Input something here" />
-        </FormItem>
-        <FormItem
-          label="Menge"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input placeholder="Input something here" />
-        </FormItem>
-        <FormItem
-          label="Markt"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select placeholder="Select an option">
-            <Option value="item1">Item 1</Option>
-            <Option value="item2">Item 2</Option>
-            <Option value="item3">Item 3</Option>
+        </Form.Item>
+        <Form.Item label="Preis">
+          <InputNumber
+            className="w-100"
+            name="price"
+            placeholder="Preis des Lebensmittels in €"
+            onChange={(priceInput) =>
+              setFormData({ ...formData, price: priceInput })
+            }
+          />
+        </Form.Item>
+        <Form.Item label="Gewicht">
+          <InputNumber
+            className="w-100"
+            name="weight"
+            placeholder="Gewicht des Lebensmittels in kg"
+            onChange={(weightInput) =>
+              setFormData({ ...formData, weight: weightInput })
+            }
+          />
+        </Form.Item>
+        <Form.Item label="Menge">
+          <InputNumber
+            className="w-100"
+            name="quantity"
+            placeholder="Menge des Lebensmittels"
+            onChange={(quantityInput) =>
+              setFormData({ ...formData, quantity: quantityInput })
+            }
+          />
+        </Form.Item>
+        <Form.Item label="Markt">
+          <Select
+            name="boughtSource"
+            placeholder="Ort des Kaufs"
+            onChange={(boughtSourceInput) =>
+              setFormData({ ...formData, boughtSource: boughtSourceInput })
+            }
+          >
+            <Option value="rewe">Rewe</Option>
+            <Option value="aldi">Aldi</Option>
+            <Option value="lidl">Lidl</Option>
+            <Option value="kaufland">Kaufland</Option>
+            <Option value="netto">Netto</Option>
+            <Option value="edeka">EDEKA</Option>
+            <Option value="asia">Asia Markt</Option>
+            <Option value="sontiges">Sonstiges</Option>
           </Select>
-        </FormItem>
-        <FormItem>
-          <Row>
-            <Col span={6} className="t-right pr-1">
-              <Switch />
+          <Row className="mt-1">
+            <Col span={2} className="t-right pr-1">
+              <Switch onChange={() => setDisable(!disable)} />
             </Col>
-            <Col span={18}>
-              <Input placeholder="Andere" />
+            <Col span={22}>
+              <Input
+                name="boughtSource"
+                placeholder="Andere"
+                disabled={disable}
+                onChange={(boughtSourceInput) =>
+                  setFormData({
+                    ...formData,
+                    boughtSource: boughtSourceInput.target.value,
+                  })
+                }
+              />
             </Col>
           </Row>
-        </FormItem>
-        <FormItem
-          label="Nahrung"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select>
-            <Select.Option value="meat1">Meat 1</Select.Option>
-            <Select.Option value="meat2">Meat 2</Select.Option>
-            <Select.Option value="meat3">Meat 3</Select.Option>
-            <Select.Option value="meat4">Meat 4</Select.Option>
-            <Select.Option value="meat5">Meat 5</Select.Option>
+        </Form.Item>
+        <Form.Item label="Nahrung">
+          <Select
+            name="category"
+            showSearch
+            placeholder="Art der Nahrung"
+            onChange={(categoryInput) =>
+              setFormData({ ...formData, category: categoryInput })
+            }
+          >
+            <Select.Option value="meat">Fleisch</Select.Option>
+            <Select.Option value="fish">Fisch</Select.Option>
+            <Select.Option value="vegetable">Gemüse</Select.Option>
+            <Select.Option value="additive">Zusatz</Select.Option>
           </Select>
-        </FormItem>
-        <FormItem className="w-100 t-right">
+        </Form.Item>
+        <div className="w-100 t-right">
           <Button
             style={{ backgroundColor: "#a0d911", color: "#fff" }}
             htmlType="submit"
             size="large"
-            //onClick={(e) => onSubmit(e)}
+            onClick={(e) => addGood(e)}
           >
             Speichern
           </Button>
-        </FormItem>
+        </div>
       </Form>
     </div>
   );

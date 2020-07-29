@@ -1,5 +1,9 @@
 @import '~antd/dist/antd.css';
 
+.f-bold{
+  font-weight: bold;
+}
+
 .cl-white{
   color: white !important;
 }

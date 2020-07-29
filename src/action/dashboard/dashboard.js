@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SERVER_BACKEND } from "../../constant/constant";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const add = (name, price, quantity, weight, boughtSource, category) => {
   const config = {
@@ -16,6 +17,7 @@ export const add = (name, price, quantity, weight, boughtSource, category) => {
     boughtSource,
     category,
   });
+  console.log(body);
   return axios.post(`${SERVER_BACKEND}/good`, body, config);
 };
 
@@ -37,19 +39,19 @@ export const getGoodById = (id) => {
 export const deleteGoodById = (id) => {
   try {
     axios.delete(`${SERVER_BACKEND}/good/` + id);
-    toast("delete succeeded", {
-      className: "custom-toast",
+    toast("Waren ist gelöscht!", {
+      className: "custom-toast f-bold",
       position: toast.POSITION.BOTTOM_CENTER,
     });
   } catch (error) {
     console.log(error);
     toast("error orcurred", {
-      className: "custom-toast",
+      className: "custom-toast f-bold",
       position: toast.POSITION.BOTTOM_CENTER,
     });
   }
 };
 
-/* export const refresh = () => {
+export const refresh = () => {
   window.location.reload(false);
-}; */
+};

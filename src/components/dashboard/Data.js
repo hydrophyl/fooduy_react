@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Table, Typography, Popconfirm } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
-import { DeleteFilled , EditOutlined } from "@ant-design/icons";
+import { DeleteFilled, EditOutlined } from "@ant-design/icons";
+//import { Moment } from "react-moment";
 
 const { Title } = Typography;
 function Data() {
@@ -28,28 +29,31 @@ function Data() {
     {
       title: "Menge",
       dataIndex: "quantity",
+      sorter: (a, b) => a.weight - b.weight,
       render(quantity) {
-        return <div>{quantity}</div>;
+        return <div className="t-center">{quantity}</div>;
       },
     },
     {
       title: "Gewicht",
       dataIndex: "weight",
       render(weight) {
-        return <div>{weight}</div>;
+        return <div className="t-center">{weight}</div>;
       },
     },
     {
       title: "Price in Euro",
       dataIndex: "price",
+      sorter: (a, b) => a.price - b.price,
       render(price) {
-        return <div>{price}</div>;
+        return <div className="t-center">{price}</div>;
       },
     },
-    {
+    /* {
       title: "Date",
-      dataIndex: "date",
-    },
+      dataIndex: "boughtDate",
+      render: (boughtDate) => <Moment format="YYYY/MM/DD">{boughtDate}</Moment>,
+    }, */
     {
       title: "Market",
       dataIndex: "boughtSource",
@@ -73,18 +77,12 @@ function Data() {
       render(id) {
         return (
           <div>
-            <EditOutlined 
-              style={{fontSize:"18px"}}
-              className="mr-1"
-            />
+            <EditOutlined style={{ fontSize: "18px" }} className="mr-1" />
             <Popconfirm
               title="Wirklich löschen?"
               onConfirm={() => removeGood(id)}
             >
-              <DeleteFilled 
-                style={{fontSize:"18px"}}
-                className="ml-1"
-              />
+              <DeleteFilled style={{ fontSize: "18px" }} className="ml-1" />
             </Popconfirm>
           </div>
         );
@@ -95,7 +93,11 @@ function Data() {
   return (
     <div className="ml-5 mt-1 t-center">
       <Title level={3}>Warendaten</Title>
-      <Table pagination={5} columns={columns} dataSource={goods.data} />
+      <Table
+        pagination={{ pageSize: 6 }}
+        columns={columns}
+        dataSource={goods.data}
+      />
     </div>
   );
 }

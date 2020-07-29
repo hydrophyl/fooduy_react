@@ -3,18 +3,21 @@ import "./App.css";
 import Header from "./components/common/Header";
 import Dashboard from "./components/dashboard/Dashboard";
 import Login from './components/auth/Login';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Header />
+        <ToastContainer position="top-right" />
         <Switch>
           <Route exact path="/" component={Login}/>
           <Route component={Dashboard}/>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
