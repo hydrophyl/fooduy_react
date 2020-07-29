@@ -17,8 +17,8 @@ function Dashboard() {
           <Col span={18}>
             <Switch>
               <Route exact path="/add/einkauf" component={Add}></Route>
-              <Route path="/data" component={Data}></Route>
-              <Route path="/home" component={Home}></Route>
+              <Route exact path="/data" component={Data}></Route>
+              <Route exact path="/home" component={Home}></Route>
             </Switch>
           </Col>
         </Row>

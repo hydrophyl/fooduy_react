@@ -1,7 +1,11 @@
 import React from "react";
-import { Typography, Form, Input, Checkbox, Button } from "antd";
+import { Typography, Form, Input, Checkbox, Button, Tooltip } from "antd";
+import {
+  UserOutlined,
+  InfoCircleOutlined,
+  KeyOutlined,
+} from "@ant-design/icons";
 import "../../styles/Login.css";
-import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 function Login() {
@@ -13,7 +17,6 @@ function Login() {
         </Title>
         <Form className="login-form mt-2" layout="horizontal">
           <Form.Item
-            label="Username"
             name="username"
             rules={[
               {
@@ -22,34 +25,44 @@ function Login() {
               },
             ]}
           >
-            <Input />
+            <Input
+              size="large"
+              placeholder="Enter your username"
+              prefix={<UserOutlined />}
+              suffix={
+                <Tooltip title="Username or email like email@domain.com">
+                  <InfoCircleOutlined />
+                </Tooltip>
+              }
+            />
           </Form.Item>
           <Form.Item
-            label="Password"
             name="password"
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your password!",
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password
+              size="large"
+              placeholder="Enter your password"
+              prefix={<KeyOutlined />}
+            />
           </Form.Item>
           <Form.Item name="remember">
             <Checkbox className="cl-white">Remember me</Checkbox>
           </Form.Item>
           <Form.Item>
-            <Link exact to={`/home`}>
-              <Button
-                size="large"
-                type="ghost"
-                htmlType="submit"
-                className="btn-login cl-white"
-              >
-                Login
-              </Button>
-            </Link>
+            <Button
+              size="large"
+              type="ghost"
+              htmlType="submit"
+              className="btn-login cl-white"
+            >
+              Login
+            </Button>
           </Form.Item>
         </Form>
       </div>
