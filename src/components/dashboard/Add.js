@@ -1,25 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Input, Select, Switch, Row, Col, Button } from "antd";
 import Form from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
+import { add } from "../../action/dashboard/dashboard";
+import { toast } from "react-toastify";
 
 const { Title } = Typography;
 const { Option } = Select;
 function Add() {
-  /* const [formData, setFormData] = useState(
-        {
-            name: "",
-            price: 0,
-            quantity: 0,
-            weight: 0,
-            category: "",
-            boughtSource: "",
-        }
-    );
+  const [formData, setFormData] = useState({
+    name: "",
+    price: 0,
+    quantity: 0,
+    weight: 0,
+    category: "",
+    boughtSource: "",
+  });
 
-    const {
-        name, price, quantity, weight, category, boughtSource
-    } = formData; */
+  const { name, price, quantity, weight, category, boughtSource } = formData;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      name.length === null ||
+      price === 0 ||
+      typeof price !== "number" ||
+      typeof weight !== "number" ||
+      typeof quantity !== "number" ||
+      boughtSource.length === null ||
+      category.length === null ||
+      category === ""
+    ) {
+      if (name.length === null || name === "")
+        toast.warn("Name of good is required");
+      if (price === 0 || price === "")
+        toast.warn("Price of good is required or not 0");
+      if (typeof price !== "number" || price instanceof String)
+        toast.warn("Price of good must be number");
+      if (typeof weight !== "number" || price instanceof String)
+        toast.warn("Weight of good must be number");
+      if (typeof quantity !== "number" || price instanceof String)
+        toast.warn("Quantity of good must be number");
+      if (boughtSource.length === null || boughtSource === "")
+        toast.warn("Bought source of good is required");
+      if (category.length === null || category === "")
+        toast.warn("Category source of good is required");
+    } else {
+      try {
+        await add(name, price, quantity, weight, boughtSource, category);
+        toast.success(`${name} with ${price} € has been added in Database`, {
+          position: "top-center",
+        });
+        setFormData({
+          name: "",
+          price: 0,
+          quantity: 0,
+          weight: 0,
+          boughtSource: "",
+          category: "",
+        });
+      } catch (e) {
+        toast.warning(
+          `Something is wrong! Good could not be added to the Database.`,
+          {
+            position: "top-center",
+          }
+        );
+      }
+    }
+  };
 
   return (
     <div className="Add mt-1">
@@ -34,10 +82,13 @@ function Add() {
           rules={[
             {
               required: true,
+              message: "Please input name!",
             },
           ]}
         >
-          <Input placeholder="Input something here" />
+          <Input
+            placeholder="Input something here"
+          />
         </FormItem>
         <FormItem
           label="Preis"
@@ -69,7 +120,6 @@ function Add() {
         >
           <Input placeholder="Input something here" />
         </FormItem>
-
         <FormItem
           label="Markt"
           rules={[
@@ -94,7 +144,6 @@ function Add() {
             </Col>
           </Row>
         </FormItem>
-
         <FormItem
           label="Nahrung"
           rules={[
@@ -111,12 +160,17 @@ function Add() {
             <Select.Option value="meat5">Meat 5</Select.Option>
           </Select>
         </FormItem>
+        <FormItem className="w-100 t-right">
+          <Button
+            style={{ backgroundColor: "#a0d911", color: "#fff" }}
+            htmlType="submit"
+            size="large"
+            //onClick={(e) => onSubmit(e)}
+          >
+            Speichern
+          </Button>
+        </FormItem>
       </Form>
-      <div className="w-100 t-right">
-        <Button style={{ backgroundColor: "#a0d911", color: "#fff" }}>
-          Speichern
-        </Button>
-      </div>
     </div>
   );
 }
