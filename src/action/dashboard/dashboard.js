@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { SERVER_BACKEND } from "../../constant/constant";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export const add = (name, price, quantity, weight, boughtSource, category) => {
   const config = {
@@ -20,6 +20,7 @@ export const add = (name, price, quantity, weight, boughtSource, category) => {
   console.log(body);
   return axios.post(`${SERVER_BACKEND}/good`, body, config);
 };
+
 
 export const getGoods = () => {
   try {

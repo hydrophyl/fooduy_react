@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Typography, Popconfirm } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
 import { DeleteFilled, EditOutlined } from "@ant-design/icons";
-//import { Moment } from "react-moment";
+import Edit from "./Edit";
 
 const { Title } = Typography;
 function Data() {
@@ -77,6 +77,9 @@ function Data() {
       render(id) {
         return (
           <div>
+            <Edit
+              id={id}
+            />
             <EditOutlined style={{ fontSize: "18px" }} className="mr-1" />
             <Popconfirm
               title="Wirklich löschen?"
