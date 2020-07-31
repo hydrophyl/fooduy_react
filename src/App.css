@@ -26,6 +26,9 @@
 .t-center{
   text-align: center;
 }
+.t-left{
+  text-align: left;
+}
 
 .pd-1{
   padding: 1em;

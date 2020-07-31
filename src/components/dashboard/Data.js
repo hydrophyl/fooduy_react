@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Typography, Popconfirm } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
-import { DeleteFilled, EditOutlined } from "@ant-design/icons";
+import { DeleteFilled } from "@ant-design/icons";
 import Edit from "./Edit";
 
 const { Title } = Typography;
@@ -76,16 +76,13 @@ function Data() {
       editable: true,
       render(id) {
         return (
-          <div>
-            <Edit
-              id={id}
-            />
-            <EditOutlined style={{ fontSize: "18px" }} className="mr-1" />
+          <div className="row-actions t-left">
+            <Edit _id={id}/>
             <Popconfirm
               title="Wirklich löschen?"
               onConfirm={() => removeGood(id)}
             >
-              <DeleteFilled style={{ fontSize: "18px" }} className="ml-1" />
+              <DeleteFilled style={{ fontSize: "20px" }} className="ml-1" />
             </Popconfirm>
           </div>
         );

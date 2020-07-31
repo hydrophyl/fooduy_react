@@ -46,8 +46,6 @@ function Add() {
       category.length === null ||
       category === ""
     ) {
-      console.log(formData);
-      toast.warn("Name of good is required");
       if (name.length === null || name === "")
         toast.warn("Name of good is required");
       if (price === 0 || price === "")

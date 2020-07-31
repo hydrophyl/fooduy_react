@@ -21,6 +21,24 @@ export const add = (name, price, quantity, weight, boughtSource, category) => {
   return axios.post(`${SERVER_BACKEND}/good`, body, config);
 };
 
+export const edit = (id, {name, price, quantity, weight, boughtSource, category}) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({
+    name,
+    price,
+    quantity,
+    weight,
+    boughtSource, 
+    category,
+  });
+  console.log(body);
+  id=id._id;
+  return axios.post(`${SERVER_BACKEND}/good/` + id, body, config);
+};
 
 export const getGoods = () => {
   try {
@@ -38,6 +56,7 @@ export const getGoodById = (id) => {
 };
 
 export const deleteGoodById = (id) => {
+  console.log(id);
   try {
     axios.delete(`${SERVER_BACKEND}/good/` + id);
     toast("Waren ist gelöscht!", {
