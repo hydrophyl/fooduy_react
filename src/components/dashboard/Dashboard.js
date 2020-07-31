@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Add from "./Add";
 import Data from "./Data";
-import Home from "../common/Home";
 import LeftSider from "../common/LeftSider";
 import {Row, Col} from 'antd';
 
@@ -18,7 +17,6 @@ function Dashboard() {
             <Switch>
               <Route exact path="/add/einkauf" component={Add}></Route>
               <Route exact path="/data" component={Data}></Route>
-              <Route exact path="/home" component={Home}></Route>
             </Switch>
           </Col>
         </Row>

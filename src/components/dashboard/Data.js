@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Typography, Popconfirm } from "antd";
+import { Table, Typography, Popconfirm, Modal } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
 import { DeleteFilled } from "@ant-design/icons";
 import Edit from "./Edit";
@@ -77,7 +77,7 @@ function Data() {
       render(id) {
         return (
           <div className="row-actions t-left">
-            <Edit _id={id}/>
+            <Edit _id={id} />
             <Popconfirm
               title="Wirklich löschen?"
               onConfirm={() => removeGood(id)}
@@ -97,9 +97,32 @@ function Data() {
         pagination={{ pageSize: 6 }}
         columns={columns}
         dataSource={goods.data}
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: (e) => {
+              Detail()
+              //console.log(goods.data[rowIndex]._id);
+            },
+          };
+        }}
       />
     </div>
   );
 }
 
 export default Data;
+
+function Detail() {
+  Modal.info({
+    title: "Details",
+    content: (
+      <div>
+        <p>some messages...some messages...</p>
+        <p>some messages...some messages...</p>
+      </div>
+    ),
+    onOk() {
+      console.log("OK");
+    },
+  });
+}

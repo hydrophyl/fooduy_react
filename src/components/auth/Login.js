@@ -1,8 +1,7 @@
 import React from "react";
-import { Typography, Form, Input, Checkbox, Button, Tooltip } from "antd";
+import { Typography, Form, Input, Checkbox, Button} from "antd";
 import {
   UserOutlined,
-  InfoCircleOutlined,
   KeyOutlined,
 } from "@ant-design/icons";
 import "../../styles/Login.css";
@@ -13,7 +12,7 @@ function Login() {
     <div className="t-center w-100 bg-dark vh-100 pt-5">
       <div className="login-window m-auto pd-2">
         <Title level={2} className="cl-white">
-          Sign in
+          Log in
         </Title>
         <Form className="login-form mt-2" layout="horizontal">
           <Form.Item
@@ -29,11 +28,6 @@ function Login() {
               size="large"
               placeholder="Enter your username"
               prefix={<UserOutlined />}
-              suffix={
-                <Tooltip title="Username or email like email@domain.com">
-                  <InfoCircleOutlined />
-                </Tooltip>
-              }
             />
           </Form.Item>
           <Form.Item

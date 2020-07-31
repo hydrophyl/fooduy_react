@@ -116,8 +116,9 @@ function Edit(_id) {
             <Input
               name="name"
               placeholder="Name des Lebensmittels"
+              defaultValue="thit meo"
               onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
+                setFormData({ ...formData, name: e.target.value }) 
               }
             />
           </Form.Item>
@@ -153,6 +154,7 @@ function Edit(_id) {
           <Form.Item label="Markt">
             <Select
               name="boughtSource"
+              showSearch
               placeholder="Ort des Kaufs"
               onChange={(boughtSourceInput) =>
                 setFormData({ ...formData, boughtSource: boughtSourceInput })

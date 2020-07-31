@@ -14,7 +14,7 @@ function App() {
         <Header />
         <ToastContainer position="top-right" />
         <Switch>
-          <Route exact path="/" component={Login}/>
+          <Route exact path="/login" component={Login}/>
           <Route component={Dashboard}/>
         </Switch>
       </BrowserRouter>

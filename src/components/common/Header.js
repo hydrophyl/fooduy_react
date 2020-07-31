@@ -10,7 +10,7 @@ function Header() {
       <Row className="navbar">
         <Col span={10}></Col>
         <Col span={13} className="logo">
-          <Link exact to={`/home`}>
+          <Link exact to={`/login`}>
             <img alt="logo" src={foodylogo} />
           </Link>
         </Col>
