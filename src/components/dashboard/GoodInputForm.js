@@ -32,7 +32,15 @@ function GoodInputForm() {
     category: "",
   });
 
-  const { id, name, price, weight, quantity, boughtSource, category } = goodData;
+  const {
+    id,
+    name,
+    price,
+    weight,
+    quantity,
+    boughtSource,
+    category,
+  } = goodData;
 
   const checkGood = async (e) => {
     try {

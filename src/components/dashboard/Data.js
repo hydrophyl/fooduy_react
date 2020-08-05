@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Table, Typography, Popconfirm, Modal } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
 import { DeleteFilled } from "@ant-design/icons";
-import Edit from "./Edit";
 import GoodEditForm from "./GoodEditForm";
 
 const { Title } = Typography;
@@ -75,8 +74,7 @@ function Data() {
       render(id) {
         return (
           <div className="row-actions t-left">
-            <GoodEditForm />
-            <Edit _id={id} />
+            <GoodEditForm _id={id} />
             <Popconfirm
               title="Wirklich löschen?"
               onConfirm={() => removeGood(id)}

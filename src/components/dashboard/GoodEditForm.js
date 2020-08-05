@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Name required"),
 });
 
-function GoodEditForm() {
+function GoodEditForm(_id) {
   const [goodData, setGoodData] = useState({
     id: null,
     name: "",
@@ -48,6 +48,7 @@ function GoodEditForm() {
       await validationSchema.validate(goodData);
       toast.success("Ngonnnnn");
       console.log(id, name, price, weight, quantity, boughtSource, category);
+      edit(_id, goodData);
       setState({ confirmLoading: true });
     } catch (error) {
       console.log(error.errors);

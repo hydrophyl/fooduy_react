@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout, Menu} from "antd";
+import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import { PlusCircleOutlined, BarChartOutlined } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
@@ -18,18 +18,13 @@ function LeftSider() {
       >
         <Menu style={{ backgroundColor: "#262626" }} mode="inline" theme="dark">
           <SubMenu key="1" icon={<PlusCircleOutlined />} title="Zutaten">
-            <Menu.Item key="11" icon={<PlusCircleOutlined />}>
+            <Menu.Item key="10" icon={<PlusCircleOutlined />}>
               <Link exact to={`/add/einkauf`}>
-                Einkaufen
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="12" icon={<PlusCircleOutlined />}>
-              Lieferando
-            </Menu.Item>
-            <Menu.Item key="13" icon={<PlusCircleOutlined />}>
-              <Link exact to={`/add/neweinkauf`}>
                 yup-validated Einkaufen
               </Link>
+            </Menu.Item>
+            <Menu.Item key="11" icon={<PlusCircleOutlined />}>
+              Lieferando
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="2" icon={<BarChartOutlined />}>
