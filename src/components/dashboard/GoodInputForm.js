@@ -3,6 +3,7 @@ import { Button, Input, Form, Select } from "antd";
 import { BoughtSource } from "../../entities/BoughtSource";
 import { GoodCategory } from "../../entities/GoodCategory";
 import * as Yup from "yup";
+import { add } from "../../action/dashboard/dashboard";
 import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
@@ -21,7 +22,7 @@ const validationSchema = Yup.object({
 });
 
 function GoodInputForm() {
-  const [state, setState] = useState({
+  const [goodData, setGoodData] = useState({
     id: null,
     name: "",
     price: 0,
@@ -31,11 +32,12 @@ function GoodInputForm() {
     category: "",
   });
 
-  const { id, name, price, weight, quantity, boughtSource, category } = state;
+  const { id, name, price, weight, quantity, boughtSource, category } = goodData;
 
   const checkGood = async (e) => {
     try {
-      await validationSchema.validate(state);
+      await validationSchema.validate(goodData);
+      toast.success("Ngonnnnn");
     } catch (error) {
       console.log(error.errors);
       toast.warning(error.errors[0]);
@@ -44,12 +46,17 @@ function GoodInputForm() {
 
   const handleInputChange = (event) => {
     const target = event.target;
-    setState({ ...state, [target.name]: target.value });
+    setGoodData({ ...goodData, [target.name]: target.value });
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     //add function to POST data to server
-    checkGood(e);
+    try {
+      await checkGood(e);
+      await add(name, price, quantity, weight, boughtSource, category);
+    } catch (error) {
+      console.log(error);
+    }
     console.log(id, name, price, weight, quantity, boughtSource, category);
   };
 
@@ -76,6 +83,7 @@ function GoodInputForm() {
             htmlType="number"
             name="price"
             className="w-100"
+            defaultValue={0}
             onChange={(e) => handleInputChange(e)}
           />
         </Form.Item>
@@ -84,6 +92,7 @@ function GoodInputForm() {
             htmlType="number"
             name="weight"
             className="w-100"
+            defaultValue={0}
             onChange={(e) => handleInputChange(e)}
           />
         </Form.Item>
@@ -92,6 +101,7 @@ function GoodInputForm() {
             htmlType="number"
             name="quantity"
             className="w-100"
+            defaultValue={0}
             onChange={(e) => handleInputChange(e)}
           />
         </Form.Item>
@@ -100,7 +110,7 @@ function GoodInputForm() {
             name="boughtSource"
             showSearch
             onChange={(boughtSourceInput) =>
-              setState({ ...state, boughtSource: boughtSourceInput })
+              setGoodData({ ...goodData, boughtSource: boughtSourceInput })
             }
           >
             {Object.values(BoughtSource).map((boughtSource) => (
@@ -115,7 +125,7 @@ function GoodInputForm() {
             name="category"
             showSearch
             onChange={(categoryInput) =>
-              setState({ ...state, category: categoryInput })
+              setGoodData({ ...goodData, category: categoryInput })
             }
           >
             {Object.values(GoodCategory).map((category) => (
@@ -125,7 +135,9 @@ function GoodInputForm() {
             ))}
           </Select>
         </Form.Item>
-        <Button type="primary" htmlType="submit">Add to database</Button>
+        <Button type="primary" htmlType="submit">
+          Add to database
+        </Button>
       </Form>
     </div>
   );

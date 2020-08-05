@@ -3,8 +3,10 @@ import { Table, Typography, Popconfirm, Modal } from "antd";
 import { getGoods, deleteGoodById } from "../../action/dashboard/dashboard";
 import { DeleteFilled } from "@ant-design/icons";
 import Edit from "./Edit";
+import GoodEditForm from "./GoodEditForm";
 
 const { Title } = Typography;
+
 function Data() {
   const [goods, setGoods] = useState([]);
 
@@ -29,7 +31,7 @@ function Data() {
     {
       title: "Menge",
       dataIndex: "quantity",
-      sorter: (a, b) => a.weight - b.weight,
+      sorter: (a, b) => a.quantity - b.quantity,
       render(quantity) {
         return <div className="t-center">{quantity}</div>;
       },
@@ -37,6 +39,7 @@ function Data() {
     {
       title: "Gewicht",
       dataIndex: "weight",
+      sorter: (a, b) => a.weight - b.weight,
       render(weight) {
         return <div className="t-center">{weight}</div>;
       },
@@ -49,11 +52,6 @@ function Data() {
         return <div className="t-center">{price}</div>;
       },
     },
-    /* {
-      title: "Date",
-      dataIndex: "boughtDate",
-      render: (boughtDate) => <Moment format="YYYY/MM/DD">{boughtDate}</Moment>,
-    }, */
     {
       title: "Market",
       dataIndex: "boughtSource",
@@ -77,6 +75,7 @@ function Data() {
       render(id) {
         return (
           <div className="row-actions t-left">
+            <GoodEditForm />
             <Edit _id={id} />
             <Popconfirm
               title="Wirklich löschen?"
@@ -99,9 +98,9 @@ function Data() {
         dataSource={goods.data}
         onRow={(record, rowIndex) => {
           return {
-            onClick: (e) => {
-              Detail()
-              //console.log(goods.data[rowIndex]._id);
+            onDoubleClick: (e) => {
+              const rowData = goods.data[rowIndex];
+              Detail(rowData);
             },
           };
         }}
@@ -112,13 +111,18 @@ function Data() {
 
 export default Data;
 
-function Detail() {
+function Detail(rowData) {
   Modal.info({
     title: "Details",
     content: (
       <div>
-        <p>some messages...some messages...</p>
-        <p>some messages...some messages...</p>
+        <p>{rowData.boughtDate}</p>
+        <p>{rowData.name}</p>
+        <p>{rowData.price}</p>
+        <p>{rowData.weight}</p>
+        <p>{rowData.quantity}</p>
+        <p>{rowData.boughtSource}</p>
+        <p>{rowData.category}</p>
       </div>
     ),
     onOk() {
