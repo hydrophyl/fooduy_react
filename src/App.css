@@ -7,6 +7,9 @@
 .cl-white{
   color: white !important;
 }
+.cl-red{
+  color:red;
+}
 
 .w-100{
   width: 100%;
@@ -90,4 +93,7 @@
 }
 .mr-5{
   margin-right: 5em;
+}
+.mb-1{
+  margin-bottom: 1em;
 }

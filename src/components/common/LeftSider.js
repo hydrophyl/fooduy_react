@@ -26,6 +26,11 @@ function LeftSider() {
             <Menu.Item key="12" icon={<PlusCircleOutlined />}>
               Lieferando
             </Menu.Item>
+            <Menu.Item key="13" icon={<PlusCircleOutlined />}>
+              <Link exact to={`/add/neweinkauf`}>
+                yup-validated Einkaufen
+              </Link>
+            </Menu.Item>
           </SubMenu>
           <Menu.Item key="2" icon={<BarChartOutlined />}>
             <Link exact to={`/data`}>

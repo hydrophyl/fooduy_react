@@ -86,7 +86,7 @@ function Add() {
   };
 
   return (
-    <div className="Add mt-1">
+    <div className="t-center mt-1">
       <Title level={3}> Eingabe des Warenseinsatzs</Title>
       <Form
         labelCol={{ span: 4 }}

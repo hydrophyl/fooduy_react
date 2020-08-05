@@ -1,7 +1,8 @@
 .login-window{
     height: 60vh;
     width: 30%;
-    background: url(../images/login-bg.jpg) no-repeat fixed center;
+    /* background: url(../images/login-bg.jpg) no-repeat fixed center; */
+    background-color: #262626;
     background-size: 600px 600px;
     background-blend-mode: darken;
 }

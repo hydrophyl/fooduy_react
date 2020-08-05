@@ -10,18 +10,18 @@ function Header() {
       <Row className="navbar">
         <Col span={10}></Col>
         <Col span={13} className="logo">
-          <Link exact to={`/login`}>
             <img alt="logo" src={foodylogo} />
-          </Link>
         </Col>
         <Col span={1} className="navItems">
-          <Avatar
-            className="userIcon"
-            size="large"
-            shape="square"
-            style={{ backgroundColor: "#87d068" }}
-            icon={<UserOutlined />}
-          />
+          <Link exact to={`/login`}>
+            <Avatar
+              className="userIcon"
+              size="large"
+              shape="square"
+              style={{ backgroundColor: "#87d068" }}
+              icon={<UserOutlined />}
+            />
+          </Link>
         </Col>
       </Row>
     </div>
