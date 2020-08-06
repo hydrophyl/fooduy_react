@@ -3,7 +3,7 @@ import { Input, Form, Select, Modal, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { BoughtSource } from "../../entities/BoughtSource";
 import { GoodCategory } from "../../entities/GoodCategory";
-import { edit } from "../../action/dashboard/dashboard";
+import { edit, getGoodById } from "../../action/dashboard/dashboard";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ const validationSchema = Yup.object({
 
 function GoodEditForm(_id) {
   const [goodData, setGoodData] = useState({
-    id: null,
+    id: _id._id,
     name: "",
     price: 0,
     weight: 0,
@@ -33,21 +33,10 @@ function GoodEditForm(_id) {
     category: "",
   });
 
-  const {
-    id,
-    name,
-    price,
-    weight,
-    quantity,
-    boughtSource,
-    category,
-  } = goodData;
-
   const handleOK = async (e) => {
     try {
       await validationSchema.validate(goodData);
       toast.success("Ngonnnnn");
-      console.log(id, name, price, weight, quantity, boughtSource, category);
       edit(_id, goodData);
       setState({ confirmLoading: true });
     } catch (error) {
@@ -71,9 +60,19 @@ function GoodEditForm(_id) {
 
   const showModal = () => setState({ visible: true });
 
+  const handleReset = async () => {
+    try {
+      const response = await getGoodById(_id._id);
+      setGoodData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleCancel = () => {
     setState({ visible: false });
   };
+
   return (
     <div>
       <EditOutlined
@@ -88,8 +87,8 @@ function GoodEditForm(_id) {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[
-          <Button key="back" onClick={handleCancel}>
-            Close
+          <Button key="reset" onClick={handleReset}>
+            Reset
           </Button>,
           <Button
             key="submit"
@@ -112,14 +111,18 @@ function GoodEditForm(_id) {
           size="large"
         >
           <Form.Item label="Name">
-            <Input name="name" onChange={(e) => handleInputChange(e)} />
+            <Input
+              name="name"
+              value={goodData.name}
+              onChange={(e) => handleInputChange(e)}
+            />
           </Form.Item>
           <Form.Item label="Price">
             <Input
               htmlType="number"
               name="price"
               className="w-100"
-              defaultValue={0}
+              value={goodData.price}
               onChange={(e) => handleInputChange(e)}
             />
           </Form.Item>
@@ -128,7 +131,7 @@ function GoodEditForm(_id) {
               htmlType="number"
               name="weight"
               className="w-100"
-              defaultValue={0}
+              value={goodData.weight}
               onChange={(e) => handleInputChange(e)}
             />
           </Form.Item>
@@ -137,7 +140,7 @@ function GoodEditForm(_id) {
               htmlType="number"
               name="quantity"
               className="w-100"
-              defaultValue={0}
+              value={goodData.quantity}
               onChange={(e) => handleInputChange(e)}
             />
           </Form.Item>
@@ -145,6 +148,7 @@ function GoodEditForm(_id) {
             <Select
               name="boughtSource"
               showSearch
+              value={goodData.boughtSource}
               onChange={(boughtSourceInput) =>
                 setGoodData({ ...goodData, boughtSource: boughtSourceInput })
               }
@@ -160,6 +164,7 @@ function GoodEditForm(_id) {
             <Select
               name="category"
               showSearch
+              value={goodData.category}
               onChange={(categoryInput) =>
                 setGoodData({ ...goodData, category: categoryInput })
               }
